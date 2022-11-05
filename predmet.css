@@ -1,0 +1,71 @@
+
+
+
+header{
+   
+position: fixed;
+width: 100%;
+height: fit-content;
+top: 0%;
+
+}
+.meni{
+    padding-left: 5%;
+    display: flex;
+    opacity: 1;
+
+}
+h1{
+    margin: auto;
+   
+}
+.container{
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+    margin-top: 12%;
+}
+.grid-wrapper{
+    display: grid;
+    flex-direction: row;
+    grid-template-columns: repeat(auto-fill, 200px);
+    grid-gap: 10px;
+}
+.izborni{
+    background-color: powderblue;
+}
+
+.lista{
+    list-style: none;
+	margin-left: 5%;
+	padding-left: 0;
+   
+  
+
+}
+.lista > li {
+    display: inline-block;
+	
+    
+}
+.meni-item{
+    
+   width: 25%;
+    height: fit-content;
+    overflow: hidden;
+    line-height: 0%;
+    flex-grow: 1;
+    
+ 
+}
+.neaktivni{
+    background-color: gray;
+}
+.obavezni{
+    background-color: white;
+}
+.section{
+
+    flex-grow: 1;
+    text-align: center;
+}
