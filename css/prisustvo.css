@@ -1,31 +1,116 @@
-table {
+
+
+h8{
+    text-align: center;
+    clear: both;
+}
+h9{
+    text-align: center;
+}
+.bottom{
+    border-left: 1px solid;
+    background-color: #93C47D;
+    border-top: 1px solid;
+
+}
+.bottom.nije-prisutan{
+    background-color: red ;
+}
+.first-column{
+    border-left: none !important;
+}
+ 
+.table-class {
     border-collapse: collapse;
-    width: 92%;
+    width: 65%;
     margin: auto;
-     
-    
+    height: fit-content;
   }
-  
-  td, th {
-    border: 1px solid #999;
-  width: 5%;
-    text-align: left;
-    padding: 5px;
+ 
+ .table-class td, th {
+    border: 1px solid black;
+    width:5%;
+    text-align: left; 
+    overflow: hidden;
+   
 
   }
-  table.table-class td {
-    height: 20%;
+  .table-class th{
+    font-size: 1.6em;
+    line-height: 1;
+    
+  }
+  .table-class th:first-child,  .table-class th:first-child+th{
+    text-align: center;
+
+  }
+  .table-class tr{
+   height: 50px;
     overflow: hidden;
+  line-height: 5;
+
   }
-  td:first-child{
-    width:12%;
+ 
+  .table-class td:first-child{
+    width:10%;
+    vertical-align: top;
   }
-  td:first-child+td{
+  .table-class td:first-child+td{
     width:6%;
   }
-  td:first-child+td+td+td+td+td{
-    width:20%;
+  .table-class td:first-child+td+td+td+td+td{
+    width:12%;
+  }
+ 
+  .grid-container{
+
+    display: grid;
+  grid-template-columns: repeat(5,10%);
+  
+  height: 100%;
+  }
+  .grid-container>div{
+ 
+    height:5%;
+    gap: 30px;
   }
     
+#trenutna-sedmica td{
+    width: 20%;
+    border: 1px solid black;
+    padding: 4%;
+}
+#trenutna-sedmica tr{
+    height: 50%;
+    border: 1px solid black;
+    line-height: 0 !important;
+}
+
+#trenutna-sedmica {
+    width: 100%;
+     border-collapse: collapse;
+}
+.trenutna{
+    height: 100%;
+    display: grid;
+    grid-template-columns: repeat(5,20%);
+    grid-template-rows: 50% 50%;
 
     
+}
+.trenutna>div{
+
+    box-sizing: content-box;
+    height: 100%;
+    width: 100%;
+    line-height: 0;
+}
+.upper{
+    border-left: 1px solid;
+    border-bottom: 1px solid;
+    text-align: center;
+}
+.zadnja{
+    width:25%;
+  }
+
