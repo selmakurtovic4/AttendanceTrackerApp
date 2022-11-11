@@ -1,31 +1,32 @@
-
-
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,400;0,700;1,100;1,300;1,700&display=swap');
 body{
-    scroll-padding-top: 10px;
+    background-color: #3C7A89;
+    font-family: 'Lato', sans-serif;
 }
-header{
-   
-position: fixed;
-width: 100%;
-height: fit-content;
-top: 0%;
-
-}
-.meni{
-    padding-left: 5%;
-    display: flex;
-    opacity: 1;
-
-}
+a:hover {
+  
+    background-color: #B0E0E6;
+    text-decoration: none;
+  }
 h1{
-    margin: auto;
-   
+    margin: auto; 
+    font-family: 'Lato', sans-serif;
+    color: #16262E; 
+    font-style: bold;
 }
-.container{
-    display: flex;
-    flex-direction: column;
-    align-self: flex-start;
- 
+h2,h3{
+    font-family: 'Lato', sans-serif;
+}
+p{
+    font-style: normal ;
+
+}
+
+.meni h3{
+    font-family: 'Lato', sans-serif;
+    color: #16262E;
+    width: 100%;
+    font-size: medium;
 }
 .grid-wrapper{
     display: grid;
@@ -33,38 +34,72 @@ h1{
     grid-template-columns: repeat(auto-fill, 200px);
     grid-gap: 10px;
 }
+.grid-wrapper img{
+  
+}
 .izborni{
     background-color: powderblue;
+    border-radius: 7%;
+    border: 1px solid #16262E;
 }
 
 .lista{
     list-style: none;
-	margin-left: 5%;
-	padding-left: 0;
-   
-  
 
+
+    font-family: 'Lato', sans-serif;
+    text-align: left;
+    padding-left: 0%;
+   
+   
 }
 .lista > li {
-    display: inline-block;
-	
-    
-}
-.meni-item{
-    
-   width: 25%;
-    height: fit-content;
-    overflow: hidden;
-    line-height: 0%;
-    flex-grow: 1;
-    
+    display: inline-block;  
+    text-align: left;
+    padding-left: 1%;
  
 }
+.meni a{
+    color: #16262E;
+}
+
+.meni{
+    position: fixed;
+    width: 100%;
+    height: 15%;
+    top: 0%;
+    text-align: left;
+    flex-direction: row;
+    
+    display: flex;
+}
+.meni-item{
+     width: 25%;
+     height: 100%;
+     line-height: 10%;
+     flex-grow: 1;
+     overflow-wrap: break-word;
+     white-space: normal;
+     background-color: #B0E0E6;
+     border-radius: 5%;
+     
+     text-align: left;
+    border: 1px solid #16262E;
+    padding-left: 4%;
+    margin-right: 1%;
+    padding-top: 0.5%;
+
+ }
+ .meni-item:hover{
+    background-color: #3C7A89;
+ }
 .neaktivni{
     background-color: gray;
 }
 .obavezni{
     background-color: white;
+    border-radius: 7%;
+    border: 1px solid #16262E;
 }
 .section{
 
@@ -72,5 +107,67 @@ h1{
     text-align: center;
 }
 .section h1,h2{
-    padding-top: 8%;
+    padding-top: 10%;
 }
+
+@media  (max-width: 910px) {
+    body{
+        overflow-x:hidden;
+    }
+    .grid-wrapper{
+        align-items: center;
+        justify-content: center;
+      
+    }
+    .grid-wrapper div{
+  
+  
+      text-align: center;
+  
+
+       
+    }
+    .meni{
+      /*  text-align: center;*/
+      text-align: left;
+        height: fit-content;
+        position: unset;
+        padding-left: 0%;
+        display: flex;
+        opacity: 1;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+    }
+    .meni-item{
+         width: 300px;
+         height: fit-content;
+         line-height: 0%;
+         flex-grow: 1;
+         margin: auto;
+      
+     }    
+   
+   
+  }
+
+  @media (max-width: 300px) {
+    body{
+    background-color: red;
+    overflow-x: scroll;
+    }
+    .grid-wrapper div{
+       justify-content: center;
+       margin: auto;
+       align-items: center;
+       padding-left: 35%;
+    }
+    .meni-item{
+        width: 300px;
+        overflow-x: scroll;
+    }
+   
+  }
+   
+  
