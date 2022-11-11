@@ -167,7 +167,7 @@ p{
 
   @media (max-width: 300px) {
     body{
-    background-color: red;
+
     overflow-x: scroll;
     }
     .grid-wrapper div{
