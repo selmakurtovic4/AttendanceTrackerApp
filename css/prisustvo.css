@@ -6,6 +6,9 @@ body{
     overflow-x:auto;
     
 }
+.kraj{
+  column-span: "4";
+}
 h1,h2,h3,h4{
     color: #16262E;
 }
@@ -18,17 +21,38 @@ h9{
 }
 .bottom{
     border-left: 1px solid;
-    background-color:#109648;
     border-top: 1px solid;
+    background-color: white;
 
+}
+.bottom.prisutan{
+  background-color:#109648;
 }
 .bottom.nije-prisutan{
     background-color: #E71D36 ;
+}
+
+button{
+ 
+ 
+  width: 40px;
+  height: 25px;
+}
+
+.button-prethodni{
+  margin-left: 45%;
+
+}
+.button-sljedeci{
+  
+
 }
 .first-column{
     border-left: none !important;
 }
  
+
+
 .table-class {
     border-collapse: collapse;
     width: 90%;
@@ -71,9 +95,7 @@ h9{
   .table-class td:first-child+td{
     width:6%;
   }
-  .table-class td:first-child+td+td+td+td+td{
-    width:12%;
-  }
+
  
   .grid-container{
 
@@ -103,13 +125,17 @@ h9{
     width: 100%;
      border-collapse: collapse;
 }
+
+.trenutna-sedmica{
+  width:10%!important;
+}
 .trenutna{
     height: 100%;
     display: grid;
     grid-template-columns: repeat(5,20%);
     grid-template-rows: 50% 50%;
     min-width: 100px;
-    
+   
 
     
 }
