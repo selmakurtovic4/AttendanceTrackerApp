@@ -37,7 +37,7 @@ let TabelaPrisustvo = function (divRef, podaci) {
    
            if(podaci.prisustva[i].predavanja<0 || podaci.prisustva[i].vjezbe<0)
            return false;
-           if(podaci.prisustva[i].predavanja>podaci.predavanja || podaci.prisustva[i].vjezbe>podaci.vjezbe)
+           if(podaci.prisustva[i].predavanja>podaci.brojPredavanjaSedmicno || podaci.prisustva[i].vjezbe>podaci.brojVjezbiSedmicno)
            return false;
             //Postoji prisustvo za studenta koji nije u listi studenata
            if( listaStudenata.filter(item=>item==podaci.prisustva[i].index).length==0)
@@ -122,20 +122,18 @@ for(var i=0; i<brojStudenata; i++){
      let ubacenaCell=row.insertCell();
      nacrtajKolonu(row,j,ubacenaCell,i);
       }
-   // nacrtajObicneKolone(brojSedmica-1, tr,1,i);
+ 
    let ubacenaCell=row.insertCell();
      ubacenaCell.className="trenutna-sedmica";
     nacrtajTrenutnuKolonu(brojSedmica,ubacenaCell,i);
-    let sirokaCell=row.insertCell(-1);
+    /*let sirokaCell=row.insertCell(-1);
     sirokaCell.textContent="";
-   // row.insertCell(sirokaCell);
+  
    sirokaCell.className="kraj";
    sirokaCell.colSpan="11";
+   */
    
    
-    // nacrtajObicneKolone(10, tr,7);
-  
-    //table.appendChild(tr);
  }
 
    //tr.cells[0].remove();
@@ -171,21 +169,7 @@ for(var i=0; i<brojStudenata; i++){
     let rowTrenutni=table.rows[i];
     //uklanjam prethodnu kolonu
    rowTrenutni.cells[trenutnaSedmica].remove();
-   //naKrajUbacujem
-   /*if(trenutnaSedmica==brojSedmica){
    
-   //sad trenutna kolona
-   let ubacenaCellTrenutna=rowTrenutni.insertCell();
-   ubacenaCellTrenutna.className="trenutna-sedmica";
-  nacrtajTrenutnuKolonu(trenutnaSedmica-1,ubacenaCellTrenutna,i-1);
-  //ispisuje se normalno trenutna sedmica
-  rowTrenutni.cells[trenutnaSedmica+1].remove();
-  var ubacenaCell=rowTrenutni.insertCell();
-  nacrtajKolonu(rowTrenutni,trenutnaSedmica,ubacenaCell,i-1);
-
-   }
-   else{
-    */
     //prethodna uklonjena->crtam tu trenutnu
     let ubacenaCellTrenutna=rowTrenutni.insertCell(trenutnaSedmica);
    ubacenaCellTrenutna.className="trenutna-sedmica";
@@ -194,10 +178,7 @@ for(var i=0; i<brojStudenata; i++){
    rowTrenutni.cells[trenutnaSedmica+1].remove();
    var ubacenaCell=rowTrenutni.insertCell(trenutnaSedmica+1);
    nacrtajKolonu(rowTrenutni,trenutnaSedmica,ubacenaCell,i-1);
-   
-    //var ubacenaCell=rowTrenutni.insertCell(trenutnaSedmica+1);
 
-   //}
 
    
 
@@ -233,37 +214,11 @@ for(var i=0; i<brojStudenata; i++){
     sljedecaDugme.onclick=function(){sljedecaSedmica();};
 
    
-    /*function nacrtajObicneKolone( brojSedmica, tr, pocetak, i){
-//4 do 4 
-        for(j=pocetak; j<=brojSedmica; j++){
-         
-          //  tr.removeChild( document.createElement('td') );
-         // let td3=document.createElement('td');
-           // tr.appendChild( td3 );
-            
-            
-                var ukupnoPrisustvo=podaci.brojPredavanjaSedmicno+podaci.brojVjezbiSedmicno;
-                 var pozivFunkcije=dajInformacijePoIndexuiSedmici(podaci,podaci.studenti[i].index, j);
-                 let predavanja=pozivFunkcije[0];
-                 let vjezbe=pozivFunkcije[1];
-                 let uneseniPodaci=pozivFunkcije[2];
-                 let prisustvo=( (predavanja+vjezbe)/ukupnoPrisustvo)*100;
-                 if(uneseniPodaci)
-                 tr.cells[j].innerHTML=prisustvo+"%";
-                 
-                
-            
-           
-        }
-    }*/
-
+  
     function nacrtajKolonu(row,j,ubacenaCell,i){
         //j je sedmica
         //znaci crtam j+2 kolonu
-     /*   if(pocetnoCrtanje)
-        var ubacenaCell=row.insertCell();
-        else
-        var ubacenaCell=row.insertCell(j+2);*/
+    
         var ukupnoPrisustvo=podaci.brojPredavanjaSedmicno+podaci.brojVjezbiSedmicno;
                  var pozivFunkcije=dajInformacijePoIndexuiSedmici(podaci,podaci.studenti[i].index, j);
                  let predavanja=pozivFunkcije[0];
@@ -291,9 +246,6 @@ function nacrtajTrenutnuKolonu( trenutnaSedmica,ubacenaCell,i){
      let brojPredavanja=trenutnoPrisustvo[0];
      let brojVjezbi=trenutnoPrisustvo[1];
      let unesenoTrenutnoPrisustvo=trenutnoPrisustvo[2];
-   /* td1=document.createElement('td');
-    td1.className="trenutna-sedmica";
-    tr.appendChild( td1 );*/
 
     var divTrenutna = document.createElement("div");
     divTrenutna.className="trenutna";
@@ -351,7 +303,6 @@ function nacrtajTrenutnuKolonu( trenutnaSedmica,ubacenaCell,i){
 
    divTrenutna.appendChild(divPrisustvo);
 
-    //td1.appendChild(divTrenutna);
     ubacenaCell.appendChild(divTrenutna);
    
 
