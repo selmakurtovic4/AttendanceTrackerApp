@@ -1,7 +1,5 @@
 
- 
-
-let TabelaPrisustvo = function (divRef, podaci) {
+ let TabelaPrisustvo = function (divRef, podaci) {
     //ovdje definisano da ne bude error kad podaci nisu validni
     let sljedecaSedmica = function () {}
     let prethodnaSedmica = function () {}
@@ -105,8 +103,8 @@ for(i=0; i<brojSedmica; i++){
     cell1.innerHTML=listaSedmica[i];}
 
     let sirokaCell=row.insertCell(-1);
-      sirokaCell.colSpan="11";
-    
+    sirokaCell.className="kraj";
+    sirokaCell.innerHTML=listaSedmica[brojSedmica]+"- XV";
 //ostatak tabele
 
 for(var i=0; i<brojStudenata; i++){
@@ -126,12 +124,11 @@ for(var i=0; i<brojStudenata; i++){
    let ubacenaCell=row.insertCell();
      ubacenaCell.className="trenutna-sedmica";
     nacrtajTrenutnuKolonu(brojSedmica,ubacenaCell,i);
-    /*let sirokaCell=row.insertCell(-1);
-    sirokaCell.textContent="";
+    let sirokaCell=row.insertCell(-1);
+
   
    sirokaCell.className="kraj";
-   sirokaCell.colSpan="11";
-   */
+ 
    
    
  }
@@ -250,7 +247,7 @@ function nacrtajTrenutnuKolonu( trenutnaSedmica,ubacenaCell,i){
     var divTrenutna = document.createElement("div");
     divTrenutna.className="trenutna";
   for(let i=0; i<10; i++){
-    divPrisustvo=document.createElement("div");
+    var divPrisustvo=document.createElement("div");
     var tekst=document.createElement("p");
    
     divPrisustvo.appendChild(tekst);

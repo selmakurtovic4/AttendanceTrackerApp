@@ -48,7 +48,9 @@ button{
 .first-column{
     border-left: none !important;
 }
- 
+.kraj{
+  width: 25% !important;
+}
 
 
 .table-class {
