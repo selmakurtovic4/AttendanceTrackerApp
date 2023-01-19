@@ -1,5 +1,6 @@
 
- let TabelaPrisustvo = function (divRef, podaci) {
+
+ TabelaPrisustvo = function (divRef, podaci) {
     //ovdje definisano da ne bude error kad podaci nisu validni
     let sljedecaSedmica = function () {}
     let prethodnaSedmica = function () {}
@@ -10,8 +11,7 @@
            listaStudenata.push(podaci.studenti[i].index)
    
        }
-      
-     //Isti student ima dva ili više unosa prisustva za istu sedmicu
+           //Isti student ima dva ili više unosa prisustva za istu sedmicu
      for(let i=1; i<=dajMaximum(podaci); i++){
        var listaPoSedmici=[];
       
@@ -25,7 +25,7 @@
        return false
        //duplikati
        const set=new Set(listaPoSedmici);
-      console.log(listaPoSedmici.length+" "+set.size);
+   
        if(listaPoSedmici.length!=set.size)
        return false;
            
@@ -89,7 +89,11 @@ poruka.appendChild(textNode);
 
  var table = document.createElement('table');
     table.className="table-class"
-       document.getElementById("naziv").textContent="Naziv predmeta: "+podaci.predmet;
+  var naziv=document.createElement('h2');
+  naziv.setAttribute('id','naziv');
+  naziv.innerHTML="Naziv predmeta: "+podaci.predmet;
+      // document.getElementById("naziv").textContent="Naziv predmeta: "+podaci.predmet;
+      divRef.appendChild(naziv);
  
 
 //pravim prvi red
@@ -133,13 +137,16 @@ for(var i=0; i<brojStudenata; i++){
    
  }
 
+
+
+
    //tr.cells[0].remove();
   sljedecaSedmica = function () {
     if(trenutnaSedmica!=brojSedmica){
         for(var i=1; i<=brojStudenata; i++){
             let rowTrenutni=table.rows[i];
             //uklanjam trenutnu kolonu
-            console.log(trenutnaSedmica);
+          
            rowTrenutni.cells[trenutnaSedmica+1].remove();
            //ispisuje se normalno trenutna
         var ubacenaCell=rowTrenutni.insertCell(trenutnaSedmica+1);
@@ -194,8 +201,8 @@ for(var i=0; i<brojStudenata; i++){
     var prethodnaDugme = document.createElement("BUTTON");
     var sljedecaDugme= document.createElement("BUTTON");
    
-    document.body.appendChild(prethodnaDugme);
-    document.body.appendChild(sljedecaDugme);
+    divRef.appendChild(prethodnaDugme);
+    divRef.appendChild(sljedecaDugme);
     var slikaPrethodna=document.createElement("i");
     slikaPrethodna.className="fa fa-solid fa-arrow-left"  
     var slikaSljedeca=document.createElement("i");
@@ -238,18 +245,21 @@ for(var i=0; i<brojStudenata; i++){
 
 
 function nacrtajTrenutnuKolonu( trenutnaSedmica,ubacenaCell,i){
-    console.log("trenutna sedm:"+trenutnaSedmica);
+    
     let trenutnoPrisustvo=dajInformacijePoIndexuiSedmici(podaci,podaci.studenti[i].index, trenutnaSedmica);
      let brojPredavanja=trenutnoPrisustvo[0];
+     let brojPredavanjaKontrola=trenutnoPrisustvo[0];
+     let brojVjezbiKontrola=trenutnoPrisustvo[1];
      let brojVjezbi=trenutnoPrisustvo[1];
      let unesenoTrenutnoPrisustvo=trenutnoPrisustvo[2];
+     console.log(brojVjezbi);
 
     var divTrenutna = document.createElement("div");
     divTrenutna.className="trenutna";
   for(let i=0; i<10; i++){
     var divPrisustvo=document.createElement("div");
     var tekst=document.createElement("p");
-   
+    
     divPrisustvo.appendChild(tekst);
     if(i==0){
         divPrisustvo.className="upper first-column";
@@ -271,10 +281,15 @@ function nacrtajTrenutnuKolonu( trenutnaSedmica,ubacenaCell,i){
         divPrisustvo.appendChild(document.createTextNode((i-2).toString()));
    }
    else{
+
+   
     divPrisustvo.className="bottom";
     if(i==5)
         divPrisustvo.classList.add("first-column");
-    if(i<8 && unesenoTrenutnoPrisustvo){
+    if(i<8){
+        divPrisustvo.classList.add("predavanja");
+    if(unesenoTrenutnoPrisustvo){
+        divPrisustvo.classList.add("predavanja");
         if(brojPredavanja>0)
             divPrisustvo.classList.add("prisutan");
         
@@ -282,10 +297,12 @@ function nacrtajTrenutnuKolonu( trenutnaSedmica,ubacenaCell,i){
             divPrisustvo.classList.add("nije-prisutan");
             brojPredavanja--;
         
-        }
-    else if( unesenoTrenutnoPrisustvo){
+        } }
+    else{ 
+        
+        divPrisustvo.classList.add("vjezbe");
+    if(  unesenoTrenutnoPrisustvo){
 
-    
         if(brojVjezbi>=0)
             divPrisustvo.classList.add("prisutan");
         else
@@ -294,7 +311,62 @@ function nacrtajTrenutnuKolonu( trenutnaSedmica,ubacenaCell,i){
 
     
 
-    }
+    }}
+
+    divPrisustvo.addEventListener("click",function(){
+    let poziviAjax=PoziviAjax();
+         let parent=divPrisustvo.parentNode;
+         let children=parent.childNodes;
+      if(this.classList.contains("predavanja")){
+        if(this.classList.contains("prisutan")){
+             brojPredavanjaKontrola--;
+        }
+        else if(this.classList.contains("nije-prisutan")){
+            brojPredavanjaKontrola++;
+
+        }
+        else{
+            brojPredavanjaKontrola++;
+        }
+
+      }
+      else if(this.classList.contains("vjezbe")){
+
+        if(this.classList.contains("prisutan")){
+         brojVjezbiKontrola--;
+        }
+        else if(this.classList.contains("nije-prisutan")){
+            brojVjezbiKontrola++;
+
+        }
+        else{
+            brojVjezbiKontrola++;
+            
+        }
+
+      }
+      console.log(brojVjezbiKontrola);
+      poziviAjax.postPrisustvo('math', 5, { sedmica: trenutnaSedmica, predavanja: brojPredavanjaKontrola, vjezbe: brojVjezbiKontrola}, (data, isSuccess) => {
+        if(isSuccess) {
+            console.log(data);
+        } else {
+            console.error("Request failed")
+        }
+    });       
+
+     
+});
+        /* let index = Array.prototype.indexOf.call(children, divPrisustvo);
+         if (index !== -1) {
+             console.log("Child element is present in the children collection at index: " + index);
+         } else {
+             console.log("Child element is not present in the children collection");
+         }*/
+
+
+
+        //console.log("klikic");
+    
 }
   
 
@@ -311,7 +383,7 @@ function nacrtajTrenutnuKolonu( trenutnaSedmica,ubacenaCell,i){
 
 
 function dajInformacijePoIndexuiSedmici(podaci, index, sedmica){
-    let predavanja, vjezbe;
+    let predavanja=0, vjezbe=0;
     let uneseniPodaci=false;
    for(let i=0; i<Object.keys(podaci.prisustva).length; i++ )
          if(podaci.prisustva[i].index==index && podaci.prisustva[i].sedmica==sedmica){
@@ -334,6 +406,7 @@ function dajInformacijePoIndexuiSedmici(podaci, index, sedmica){
     }
     
    
+
     
    
 };

@@ -14,6 +14,16 @@ prisustva:[
 ], 
 predmet:"WT", brojPredavanjaSedmicno:3, brojVjezbiSedmicno:2});
 
+
 //pozivanje metoda
 prisustvo.sljedecaSedmica();
 prisustvo.prethodnaSedmica();
+
+
+
+
+
+
+
+
+

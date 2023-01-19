@@ -1,0 +1,22 @@
+[
+    {
+        "nastavnik": {
+            "username": "elma",
+            "password_hash": "elma"
+        },
+        "predmeti": [
+            "RPR",
+            "WT",
+            "ASP"
+        ]
+    },
+    {
+        "nastavnik": {
+            "username": "selma",
+            "password_hash": "selma"
+        },
+        "predmeti": [
+            "ASP"
+        ]
+    }
+]
