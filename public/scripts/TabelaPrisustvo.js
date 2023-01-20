@@ -80,13 +80,6 @@ poruka.appendChild(textNode);
     var brojSedmica=dajMaximum(podaci);
     var trenutnaSedmica=brojSedmica;
     var listaSedmica=["I","II","III","IV","V","VI","VII","VIII","IX","X","XI","XII","XIII","XIV","XV"];
-    
-
-
-  
-
-
-
  var table = document.createElement('table');
     table.className="table-class"
   var naziv=document.createElement('h2');
@@ -244,16 +237,14 @@ for(var i=0; i<brojStudenata; i++){
   //ako se vrati nula, lista je prazna
 
 
-function nacrtajTrenutnuKolonu( trenutnaSedmica,ubacenaCell,i){
+function nacrtajTrenutnuKolonu( trenutnaSedmica,ubacenaCell,broj){
     
-    let trenutnoPrisustvo=dajInformacijePoIndexuiSedmici(podaci,podaci.studenti[i].index, trenutnaSedmica);
+    let trenutnoPrisustvo=dajInformacijePoIndexuiSedmici(podaci,podaci.studenti[broj].index, trenutnaSedmica);
      let brojPredavanja=trenutnoPrisustvo[0];
      let brojPredavanjaKontrola=trenutnoPrisustvo[0];
      let brojVjezbiKontrola=trenutnoPrisustvo[1];
      let brojVjezbi=trenutnoPrisustvo[1];
      let unesenoTrenutnoPrisustvo=trenutnoPrisustvo[2];
-     console.log(brojVjezbi);
-
     var divTrenutna = document.createElement("div");
     divTrenutna.className="trenutna";
   for(let i=0; i<10; i++){
@@ -295,15 +286,17 @@ function nacrtajTrenutnuKolonu( trenutnaSedmica,ubacenaCell,i){
         
         else
             divPrisustvo.classList.add("nije-prisutan");
+
             brojPredavanja--;
         
-        } }
+        } 
+    }
     else{ 
         
         divPrisustvo.classList.add("vjezbe");
-    if(  unesenoTrenutnoPrisustvo){
+    if(unesenoTrenutnoPrisustvo){
 
-        if(brojVjezbi>=0)
+        if(brojVjezbi>0)
             divPrisustvo.classList.add("prisutan");
         else
             divPrisustvo.classList.add("nije-prisutan");
@@ -345,10 +338,13 @@ function nacrtajTrenutnuKolonu( trenutnaSedmica,ubacenaCell,i){
         }
 
       }
-      console.log(brojVjezbiKontrola);
-      poziviAjax.postPrisustvo('math', 5, { sedmica: trenutnaSedmica, predavanja: brojPredavanjaKontrola, vjezbe: brojVjezbiKontrola}, (data, isSuccess) => {
+  //s    console.log(brojVjezbiKontrola);
+      poziviAjax.postPrisustvo(podaci.predmet, podaci.studenti[broj].index, { sedmica: trenutnaSedmica, predavanja: brojPredavanjaKontrola, vjezbe: brojVjezbiKontrola}, (data, isSuccess) => {
         if(isSuccess) {
+            //nova Tabela
+            divRef.innerHTML="";
             console.log(data);
+           TabelaPrisustvo(divRef, data);
         } else {
             console.error("Request failed")
         }
@@ -391,7 +387,7 @@ function dajInformacijePoIndexuiSedmici(podaci, index, sedmica){
               vjezbe=podaci.prisustva[i].vjezbe;
               uneseniPodaci=true;
          }
-
+    
    return [predavanja, vjezbe, uneseniPodaci];
 
 

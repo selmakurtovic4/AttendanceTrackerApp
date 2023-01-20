@@ -13,7 +13,7 @@
     {
         "nastavnik": {
             "username": "selma",
-            "password_hash": "selma"
+            "password_hash": "$2b$10$VwdrJ9HwNxuXhu2YQ0GRe.DoV.t4fbTwAKEw4oAekVT8lCmfPCp.G"
         },
         "predmeti": [
             "ASP"

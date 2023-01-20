@@ -2,6 +2,7 @@ let poziviAjax=PoziviAjax();
 let div = document.getElementById("divSadrzaj");
 poziviAjax.getPredmeti(function(response, data){
     if(response){
+        div.innerHTML="";
         var velicina=data.length;
         const meni = document.querySelector('.meni');
        for(let i=0; i<=velicina; i++){
@@ -68,7 +69,8 @@ poziviAjax.getPredmeti(function(response, data){
                 meniItem.addEventListener("click", function(){ console.log("klik"); poziviAjax.postLogout(function(response){
                     if(response){
                         console.log("ok");
-                        window.location.href = '../html/prijava.html';
+                        window.location.href = './prijava.html';
+                        
 
                     }
                     else{
@@ -94,9 +96,12 @@ poziviAjax.getPredmeti(function(response, data){
      
     }
          
-    else
+    else{
      
-        console.log("Fail");
+       console.log("ERROR: NISTE PRIJAVLJENI!");
+        let h1=document.createElement("h1");
+        h1.innerHTML="ERROR: NISTE PRIJAVLJENI!";
+        div.appendChild(h1);
     
     }
-   );   
+ } );   
